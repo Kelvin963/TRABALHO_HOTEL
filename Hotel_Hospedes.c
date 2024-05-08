@@ -19,7 +19,7 @@ void inicializarHotel(hotel nomedoHotel[], int tamanho) {// tamanho vai receber 
     }
 }
 
-void inserirHospede(hotel nomedoHotel[], int numeroDoQuarto) {//numeroDoQuarto recebe valor do quarto que o hospede foi inserido
+void inserirHospede(hotel nomedoHotel[], int numeroDoQuarto) {//numeroDoQuarto tem o valor de "quantidadeDEQuartos"
     if (nomedoHotel[numeroDoQuarto - 1].numHospedes < quantidadeDeHospedesPorQuarto) {//-1 pois quando o usuario digita um numero, ele pega a posição anterior. pois começa de 0
         printf("Digite o nome do hóspede: ");
         getchar();
@@ -43,15 +43,15 @@ void listarHospedes(hotel nomedoHotel[]) {
                 for(int k = 0; k < nomedoHotel[i].numHospedes - j - 1; k++){
                     if (strcmp (nomedoHotel[i].hospede[k], nomedoHotel[i].hospede[k+1]) > 0){
                         char temporario[30];
-                        strcpy(temporario, nomedoHotel[i].hospede[k]);
-                        strcpy(nomedoHotel[i].hospede[k], nomedoHotel[i].hospede[k+1]);
-                        strcpy(nomedoHotel[i].hospede[k+1], temporario);
+                        strcpy(temporario, nomedoHotel[i].hospede[k]);//hospede[K] para temporario
+                        strcpy(nomedoHotel[i].hospede[k], nomedoHotel[i].hospede[k+1]);// hospede[K+1] para hospede [K]
+                        strcpy(nomedoHotel[i].hospede[k+1], temporario);//temporario para hospede[K+1]
                     }
                 }
             }
 
             for(int j = 0; j < nomedoHotel[i].numHospedes; j++){
-                printf("- %s \n",nomedoHotel[i].hospede[j]);
+                printf("- %s \n",nomedoHotel[i].hospede[j]); //imprimir a lista ordenada
             }
         }
     }
@@ -61,20 +61,56 @@ void listarHospedes(hotel nomedoHotel[]) {
 void buscarHospede(hotel nomedoHotel[]) {
     char nome[50];
     printf("Digite o nome do hóspede a ser buscado: ");
-    getchar();
+    getchar();//limpa buffer de entrada
     fgets(nome, sizeof(nome), stdin);
-    nome[strcspn(nome, "\n")] = '\0';
+    nome[strcspn(nome, "\n")] = '\0';//atribui valor nulo ao caractere de nova linha
 
-    for (int i = 0; i < quantidadeDEQuartos; i++) {
-        for(int j = 0; j < quantidadeDeHospedesPorQuarto; j++){
-            if (strcmp(nomedoHotel[i].hospede[j], nome) == 0) {
+    for (int i = 0; i < quantidadeDEQuartos; i++) {//percorre os quartos
+        for(int j = 0; j < quantidadeDeHospedesPorQuarto; j++){//percorre os hospedes por quarto
+            if (strcmp(nomedoHotel[i].hospede[j], nome) == 0) {//compara se o hospede buscado está em algum quarto
                 printf("%s está no quarto %d.\n", nome, i + 1);
                 return;
             }
         }
     }
 
-    printf("%s não encontrado.\n", nome);
+    printf("%s não encontrado.\n", nome);//se o if nao rodar, pula pro printf
+    system("pause");
+    system("cls");
+}
+void editarHospede(hotel nomedoHotel[]) { 
+    char nome[50];
+    printf("Digite o número do quarto a ser editado: ");
+    int numeroDoQuarto;
+    scanf("%d", &numeroDoQuarto);//ler a entrada para saber o numero do quarto a ser editado
+
+    if (numeroDoQuarto >= 1 && numeroDoQuarto <= quantidadeDEQuartos) { //entre 1 e 30
+        printf("Digite o nome do hospede a ser editado:");
+            getchar();
+            fgets(nome, sizeof(nome), stdin);//ler o nome digitado para comparação
+            nome[strcspn(nome, "\n")] = '\0';//anular o "\n"
+
+            int encontrado = 0;
+            for(int i = 0; i < quantidadeDeHospedesPorQuarto; i++){//QHP = 3
+                if(strcmp(nomedoHotel[numeroDoQuarto - 1].hospede[i], nome) == 0) {//comparar o nome de cada hospede com o "nome" inserido
+                    encontrado = 1;
+                    printf("Digite o novo nome do hospede: ");
+                    fgets(nomedoHotel[numeroDoQuarto - 1].hospede[i], sizeof(nomedoHotel[numeroDoQuarto - 1].hospede[i]), stdin);
+                    nomedoHotel[numeroDoQuarto - 1].hospede[i][strcspn(nomedoHotel[numeroDoQuarto - 1].hospede[i], "\n")] = '\0';
+                    printf("Hospede editado com sucesso! \n");
+                    break;
+                //se achar o hospede, o programa vai pedir um novo nome para o mesmo local e encerrará o programa para evitar loop infinito
+                }
+            }
+            if(encontrado == 0){
+                printf("Hospede nao encontrado no quarto. \n");
+
+            }else{  
+                printf("Numero de quarto invalido");
+
+            }
+    }
+            
     system("pause");
     system("cls");
 }
