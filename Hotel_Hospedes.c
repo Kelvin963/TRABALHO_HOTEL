@@ -114,6 +114,45 @@ void editarHospede(hotel nomedoHotel[]) {
     system("pause");
     system("cls");
 }
+void removerHospede(hotel nomedoHotel[]) {
+    char nome[50];
+    printf("Digite o nome do hospede a ser removido: ");
+    getchar();
+    fgets(nome, sizeof(nome), stdin);
+    nome[strcspn(nome, "\n")] = '\0';
+
+    int quartoEncontrado = -1;
+
+    for(int i = 0; i < quantidadeDEQuartos; i++){               //lê os quartos
+        for(int j = 0; j < quantidadeDeHospedesPorQuarto; j++){ // lê os hospedes de cada quarto lido
+            if(strcmp(nomedoHotel[i].hospede[j], nome) == 0){   //comparar
+                quartoEncontrado = i;
+                nomedoHotel[i].hospede[j][0] = '\0';            //remove hospede
+                nomedoHotel[i].numHospedes--;                   //decrementa numero de hospedes
+
+                for(int k = j; k < quantidadeDeHospedesPorQuarto - 1; k++){//reorganiza os hospedes do quarto
+                    strcpy(nomedoHotel[i].hospede[k], nomedoHotel[i].hospede[k + 1]);//o codigo vai organizar a partir do que removeu e ocorrerá o break, assim o codigo nao ficará em loop
+                }
+                nomedoHotel[i].hospede[quantidadeDeHospedesPorQuarto - 1][0] = '\0';//Essa linha remove o primeiro caractere da string do último hóspede armazenado em um determinado quarto.
+                break;  
+            }
+        }
+        if(quartoEncontrado != -1){
+            break;
+        }
+    }
+    
+    if(quartoEncontrado == -1){
+        printf("%s Nao encontrado em nenhum quarto. \n", nome);
+    }else{
+        printf("Hospede removido com sucesso! \n");
+    }
+
+    system("pause");
+    system("cls");
+
+    
+}
 int main(){
 
 
