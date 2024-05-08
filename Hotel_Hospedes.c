@@ -38,6 +38,7 @@ void listarHospedes(hotel nomedoHotel[]) {
         if (nomedoHotel[i].numHospedes > 0) {            
             printf("Quarto %d:\n", i + 1);
 //Ordenar os nomes dos hóspedes diretamente no vetor do quarto usando bubble sort
+//letras tem um valor como se fossem números na lógica de programação em c, de acordo com a tabela ASCII.
             for(int j = 0; j < nomedoHotel[i].numHospedes - 1; j++){
                 for(int k = 0; k < nomedoHotel[i].numHospedes - j - 1; k++){
                     if (strcmp (nomedoHotel[i].hospede[k], nomedoHotel[i].hospede[k+1]) > 0){
