@@ -58,6 +58,7 @@ void listarHospedes(hotel nomedoHotel[]) {
     system("pause");
     system("cls");
 }
+
 void buscarHospede(hotel nomedoHotel[]) {
     char nome[50];
     printf("Digite o nome do hóspede a ser buscado: ");
@@ -78,6 +79,7 @@ void buscarHospede(hotel nomedoHotel[]) {
     system("pause");
     system("cls");
 }
+
 void editarHospede(hotel nomedoHotel[]) { 
     char nome[50];
     printf("Digite o número do quarto a ser editado: ");
@@ -91,7 +93,7 @@ void editarHospede(hotel nomedoHotel[]) {
             nome[strcspn(nome, "\n")] = '\0';//anular o "\n"
 
             int encontrado = 0;
-            for(int i = 0; i < quantidadeDeHospedesPorQuarto; i++){//QHP = 3
+            for(int i = 0; i < quantidadeDeHospedesPorQuarto; i++){
                 if(strcmp(nomedoHotel[numeroDoQuarto - 1].hospede[i], nome) == 0) {//comparar o nome de cada hospede com o "nome" inserido
                     encontrado = 1;
                     printf("Digite o novo nome do hospede: ");
@@ -114,6 +116,7 @@ void editarHospede(hotel nomedoHotel[]) {
     system("pause");
     system("cls");
 }
+
 void removerHospede(hotel nomedoHotel[]) {
     char nome[50];
     printf("Digite o nome do hospede a ser removido: ");
@@ -150,8 +153,22 @@ void removerHospede(hotel nomedoHotel[]) {
 
     system("pause");
     system("cls");
+}
 
-    
+void quartosDisponiveis(hotel nomedoHotel[]) {
+    printf("Quartos Disponíveis: \n");
+    for (int i = 0; i < quantidadeDEQuartos; i++) {//30 quartos
+        
+            if(nomedoHotel[i].numHospedes == 0) { //verifica se tem um valor dentro de cada quarto
+                printf("QUARTO 0%d: ( )\n", i + 1);
+            }else{
+                printf("QUARTO 0%d: (x)\n", i + 1);//i + 1 pois a posição do quarto começa de 0 e vai até 29
+            }
+                    
+    }
+    printf("\n");
+    system("pause");
+    system("cls");
 }
 int main(){
 
