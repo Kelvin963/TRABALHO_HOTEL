@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#define quantidadeDEQuartos 30
 #define quantidadeDeHospedesPorQuarto 3
 
 typedef struct {
@@ -31,14 +32,9 @@ void inserirHospede(hotel nomedoHotel[], int numeroDoQuarto) {//numeroDoQuarto r
     }
 }   
 
-int compararStrings(const void *a, const void *b){
-        return strcmp(*(const char **)a, *(const char **)b);
-}
-
-
 void listarHospedes(hotel nomedoHotel[]) {
     printf("Lista de hospedes por quarto:\n");
-    for (int i = 0; i < quantidadeDEQuartos; i++) {
+    for (int i = 0; i < quantidadeDEQuartos; i++) {//percorrer todos os quartos
         if (nomedoHotel[i].numHospedes > 0) {            
             printf("Quarto %d:\n", i + 1);
 //Ordenar os nomes dos hóspedes diretamente no vetor do quarto usando bubble sort
@@ -58,6 +54,26 @@ void listarHospedes(hotel nomedoHotel[]) {
             }
         }
     }
+    system("pause");
+    system("cls");
+}
+void buscarHospede(hotel nomedoHotel[]) {
+    char nome[50];
+    printf("Digite o nome do hóspede a ser buscado: ");
+    getchar();
+    fgets(nome, sizeof(nome), stdin);
+    nome[strcspn(nome, "\n")] = '\0';
+
+    for (int i = 0; i < quantidadeDEQuartos; i++) {
+        for(int j = 0; j < quantidadeDeHospedesPorQuarto; j++){
+            if (strcmp(nomedoHotel[i].hospede[j], nome) == 0) {
+                printf("%s está no quarto %d.\n", nome, i + 1);
+                return;
+            }
+        }
+    }
+
+    printf("%s não encontrado.\n", nome);
     system("pause");
     system("cls");
 }
