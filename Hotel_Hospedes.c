@@ -170,7 +170,25 @@ void quartosDisponiveis(hotel nomedoHotel[]) {
     system("pause");
     system("cls");
 }
+
+void gerartxt(hotel nomedoHotel[]) {
+    FILE *ponteiroarq;
+    ponteiroarq = fopen("C:\\Users\\Public\\ListaDeHospede", "w"); // W cria um novo arquivo no destino
+
+    for (int i = 0; i < 30; i++) {
+        for(int j = 0; j < quantidadeDeHospedesPorQuarto; j++){ //percorrer hospedes
+            if (nomedoHotel[i].hospede[j][0] != '\0') {
+                fprintf(ponteiroarq,"Quarto %d: %s\n", i + 1, nomedoHotel[i].hospede[j]);//escreve no arquivo
+            }
+        }
+    }
+    fclose(ponteiroarq);
+    printf("Arquivo Gerado com sucessos\n");
+    system("pause");
+  
+}
 int main(){
+
 
 
 
