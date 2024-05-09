@@ -187,16 +187,77 @@ void gerartxt(hotel nomedoHotel[]) {
     system("pause");
   
 }
-int main(){
+int main() {
+    setlocale(LC_ALL, "Portuguese");//console em portugues
+    hotel transilvania[quantidadeDEQuartos];//inicializar
+    inicializarHotel(transilvania, quantidadeDEQuartos);
 
+    int opcao;
+    char inserirMaisHospedes;
+    do {
+        printf("\n============= Hotel Transilvânia========================\n");
+        printf("||_______1. Inserir novo hóspede______________________||\n");
+        printf("||_______2. Listar hóspedes___________________________||\n");
+        printf("||_______3. Buscar hóspede____________________________||\n");
+        printf("||_______4. Editar hóspede____________________________||\n");
+        printf("||_______5. Remover hóspede___________________________||\n");
+        printf("||_______6. Mostrar quartos disponíveis_______________||\n");
+        printf("||_______7. Salvar em arquivo Lista de Hóspedes_______||\n");
+        printf("||_______0. Sair______________________________________||\n");
+        printf("=========================================================\n");
+        printf("\n");
+        printf("Digite a opção desejada: ");
+        scanf("%d", &opcao);
+        system("cls");
 
+        switch (opcao) {
+            case 1:
+                do{
+                system("cls");
+                printf("Digite o número do quarto: ");
+                int numeroDoQuarto;
+                scanf(" %d", &numeroDoQuarto);
+                inserirHospede(transilvania, numeroDoQuarto);
+                printf("Deseja inserir mais Hóspedes? (S) para Sim e (N) para Não: ");
+                scanf(" %c", &inserirMaisHospedes);
 
+                }while(inserirMaisHospedes != 'N');
+                system("cls");
+                break;
+            case 2:
+                system("cls");
+                listarHospedes(transilvania);
+                break;
+            case 3:
+                system("cls");
+                buscarHospede(transilvania);
+                break;
+            case 4:
+                system("cls");
+                editarHospede(transilvania);
+                break;
+            case 5:
+                system("cls");
+                removerHospede(transilvania);
+                break;
+            case 6:
+                system("cls");
+                quartosDisponiveis(transilvania);
+                break;
+            case 7:
+                system("cls");
+                gerartxt(transilvania);
+                system("cls");
+                break;
+            case 0:
+                printf("Saindo do programa. Até logo!\n");
+                system("pause");
+                break;
+            default:
+                printf("Opção inválida. Tente novamente.\n");
+        }
 
-
-
-
-
-
+    } while (opcao != 0);
 
     return 0;
 }
