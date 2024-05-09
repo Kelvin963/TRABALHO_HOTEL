@@ -111,6 +111,8 @@ void editarHospede(hotel nomedoHotel[]) {
                 printf("Numero de quarto invalido");
 
             }
+    }else{ 
+        printf("Numero de quarto invalido. \n");
     }
             
     system("pause");
@@ -134,12 +136,14 @@ void removerHospede(hotel nomedoHotel[]) {
                 nomedoHotel[i].numHospedes--;                   //decrementa numero de hospedes
 
                 for(int k = j; k < quantidadeDeHospedesPorQuarto - 1; k++){//reorganiza os hospedes do quarto
-                    strcpy(nomedoHotel[i].hospede[k], nomedoHotel[i].hospede[k + 1]);//o codigo vai organizar a partir do que removeu e ocorrerá o break, assim o codigo nao ficará em loop
+                    strcpy(nomedoHotel[i].hospede[k], nomedoHotel[i].hospede[k + 1]);//o codigo vai organizar até o penultimo, já que o ultimo vai ficar vazio
                 }
                 nomedoHotel[i].hospede[quantidadeDeHospedesPorQuarto - 1][0] = '\0';//Essa linha remove o primeiro caractere da string do último hóspede armazenado em um determinado quarto.
-                break;  
+                break;
+                  
             }
         }
+        
         if(quartoEncontrado != -1){
             break;
         }
@@ -162,7 +166,7 @@ void quartosDisponiveis(hotel nomedoHotel[]) {
             if(nomedoHotel[i].numHospedes == 0) { //verifica se tem um valor dentro de cada quarto
                 printf("QUARTO 0%d: ( )\n", i + 1);
             }else{
-                printf("QUARTO 0%d: (x)\n", i + 1);//i + 1 pois a posição do quarto começa de 0 e vai até 29
+                printf("QUARTO 0%d: (x)\n", i + 1);
             }
                     
     }
@@ -220,7 +224,7 @@ int main() {
                 inserirHospede(transilvania, numeroDoQuarto);
                 printf("Deseja inserir mais Hóspedes? (S) para Sim e (N) para Não: ");
                 scanf(" %c", &inserirMaisHospedes);
-
+                
                 }while(inserirMaisHospedes != 'N');
                 system("cls");
                 break;
