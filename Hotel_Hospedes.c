@@ -236,7 +236,7 @@ int main() {
         printf("||_______4. Editar hospede____________________________||\n");
         printf("||_______5. Remover hospede___________________________||\n");
         printf("||_______6. Mostrar quartos disponiveis_______________||\n");
-        printf("||_______7. Salvar em arquivo Lista de Hospedes_______||\n");
+        printf("||_______7. Salvar Lista de Hospedes em arquivo_______||\n");
         printf("||_______0. Sair______________________________________||\n");
         printf("=========================================================\n");
         printf("\n");
