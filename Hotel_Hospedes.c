@@ -240,7 +240,7 @@ int main() {
         printf("||_______0. Sair______________________________________||\n");
         printf("=========================================================\n");
         printf("\n");
-        printf("Digite a opção desejada: ");
+        printf("Digite a opcao desejada: ");
         scanf("%d", &opcao);
         system("cls");
 
@@ -248,11 +248,11 @@ int main() {
             case 1:
                 do{
                 system("cls");
-                printf("Digite o número do quarto: ");
+                printf("Digite o numero do quarto: ");
                 int numeroDoQuarto;
                 scanf(" %d", &numeroDoQuarto);
                 inserirHospede(transilvania, numeroDoQuarto);
-                printf("Deseja inserir mais Hóspedes? (S) para Sim e (N) para Não: ");
+                printf("Deseja inserir mais Hospedes? (S) para Sim e (N) para Nao: ");
                 scanf(" %c", &inserirMaisHospedes);
                 
                 }while(inserirMaisHospedes != 'N');
@@ -284,11 +284,11 @@ int main() {
                 system("cls");
                 break;
             case 0:
-                printf("Saindo do programa. Até logo!\n");
+                printf("Saindo do programa. \n");
                 system("pause");
                 break;
             default:
-                printf("Opção inválida. Tente novamente.\n");
+                printf("Opcao invalida. Tente novamente.\n");
         }
 
     } while (opcao != 0);
