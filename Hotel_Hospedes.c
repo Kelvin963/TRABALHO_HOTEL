@@ -165,7 +165,7 @@ void quartosDisponiveis(hotel nomedoHotel[]) {
         
             if(nomedoHotel[i].numHospedes == 0) { //verifica se tem um valor dentro de cada quarto
                 printf("QUARTO 0%d: ( )\n", i + 1);
-            }else{
+            }else{ 
                 printf("QUARTO 0%d: (x)\n", i + 1);
             }
                     
@@ -175,9 +175,9 @@ void quartosDisponiveis(hotel nomedoHotel[]) {
     system("cls");
 }
 
-void gerartxt(hotel nomedoHotel[]) {
+void salvartxt(hotel nomedoHotel[]) {
     FILE *ponteiroarq;
-    ponteiroarq = fopen("C:\\Users\\Public\\ListaDeHospede", "w"); // W cria um novo arquivo no destino
+    ponteiroarq = fopen("C:\\Users\\Public\\ListaDeHospede", "r+"); // W cria um novo arquivo no destino
 
     for (int i = 0; i < 30; i++) {
         for(int j = 0; j < quantidadeDeHospedesPorQuarto; j++){ //percorrer hospedes
@@ -191,22 +191,52 @@ void gerartxt(hotel nomedoHotel[]) {
     system("pause");
   
 }
+
+void lertxt(hotel nomedoHotel[]) {
+    FILE *ponteiroarq;
+    ponteiroarq = fopen("C:\\Users\\Public\\ListaDeHospede", "r+");
+
+    if(ponteiroarq == NULL){
+        printf("Erro ao abrir o arquivo");
+    }
+    
+    char linha[100];
+    
+    while (fgets(linha, sizeof(linha),  ponteiroarq) != NULL){
+
+        int numeroQuarto; //armazena o numero do quarto que vai ser lido
+        char nomeHospede[30];
+ 
+    if (sscanf(linha, "Quarto %d: %s", &numeroQuarto, nomeHospede) == 2){//le uma linha com um formato específico e verifica se extraiu 2 valores
+        strcpy(nomedoHotel[numeroQuarto - 1].hospede[nomedoHotel[numeroQuarto - 1].numHospedes], nomeHospede);//copiar o que foi armazenado em nmeHospede para a estrutura de hospedes do hotel
+        nomedoHotel[numeroQuarto - 1].numHospedes++;//após adicionar o hospede à lista, aumentar em 1 o numHospedes
+        }
+    }
+    fclose(ponteiroarq);
+    printf("Dados do arquivo lidos com sucesso. \n");
+    system("pause");
+    system("cls");
+}
+
 int main() {
     setlocale(LC_ALL, "Portuguese");//console em portugues
+
     hotel transilvania[quantidadeDEQuartos];//inicializar
     inicializarHotel(transilvania, quantidadeDEQuartos);
+    lertxt(transilvania);
+
 
     int opcao;
     char inserirMaisHospedes;
     do {
-        printf("\n============= Hotel Transilvânia========================\n");
-        printf("||_______1. Inserir novo hóspede______________________||\n");
-        printf("||_______2. Listar hóspedes___________________________||\n");
-        printf("||_______3. Buscar hóspede____________________________||\n");
-        printf("||_______4. Editar hóspede____________________________||\n");
-        printf("||_______5. Remover hóspede___________________________||\n");
-        printf("||_______6. Mostrar quartos disponíveis_______________||\n");
-        printf("||_______7. Salvar em arquivo Lista de Hóspedes_______||\n");
+        printf("\n============= Hotel Transilvania========================\n");
+        printf("||_______1. Inserir novo hospede______________________||\n");
+        printf("||_______2. Listar hospedes___________________________||\n");
+        printf("||_______3. Buscar hospede____________________________||\n");
+        printf("||_______4. Editar hospede____________________________||\n");
+        printf("||_______5. Remover hospede___________________________||\n");
+        printf("||_______6. Mostrar quartos disponiveis_______________||\n");
+        printf("||_______7. Salvar em arquivo Lista de Hospedes_______||\n");
         printf("||_______0. Sair______________________________________||\n");
         printf("=========================================================\n");
         printf("\n");
@@ -250,7 +280,7 @@ int main() {
                 break;
             case 7:
                 system("cls");
-                gerartxt(transilvania);
+                salvartxt(transilvania);
                 system("cls");
                 break;
             case 0:
